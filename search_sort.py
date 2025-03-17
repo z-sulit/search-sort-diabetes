@@ -22,11 +22,11 @@ class SearchSortBase:
 
 #----Bubble, Selection, and Insertion Sort----
 class DiabetesData(SearchSortBase):
-      def linear_search(self, column, target):
-        for index, value in enumerate(self.df[column]):
-            if value == target:
-                return index
-        return -1
+    def linear_search(self, column, target):
+      for index, value in enumerate(self.df[column]):
+          if value == target:
+              return index
+      return -1
     def binary_search(self, column, target):
         values = self.df[column].tolist()
         # sariling quicksort in binary search
