@@ -22,6 +22,48 @@ class SearchSortBase:
 
 #----Bubble, Selection, and Insertion Sort----
 class DiabetesData(SearchSortBase):
+      def linear_search(self, column, target):
+        for index, value in enumerate(self.df[column]):
+            if value == target:
+                return index
+        return -1
+    def binary_search(self, column, target):
+        values = self.df[column].tolist()
+        # sariling quicksort in binary search
+        def quicksort(arr):
+            if len(arr) <= 1:
+                return arr
+            pivot = arr[len(arr) // 2]
+            left = [x for x in arr if x < pivot]
+            middle = [x for x in arr if x == pivot]
+            right = [x for x in arr if x > pivot]
+            return quicksort(left) + middle + quicksort(right)
+
+        sorted_values = quicksort(values)
+
+        # Binary Search on sorted list
+        low, high = 0, len(sorted_values) - 1
+        # Attempt to convert target to the correct data type
+        try:
+            # If the column data type is numeric, convert target to a number
+            if pd.api.types.is_numeric_dtype(self.df[column]):
+                target = float(target)
+            # Otherwise, keep target as a string (for string comparisons)
+        except ValueError:
+            print("Invalid target value. Please enter a valid number or string.")
+            return -1
+        while low <= high:
+            mid = (low + high) // 2
+            if sorted_values[mid] == target:
+                # Return the index of the first occurrence in original dataframe
+                for idx, val in enumerate(self.df[column]):
+                    if val == target:
+                        return idx
+            elif sorted_values[mid] < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return -1
   def bubble_sort(self, column):
     sorted_data = self.df.copy()
     values = sorted_data[column].tolist()
