@@ -27,14 +27,83 @@ class DiabetesData(SearchSortBase):
     values = sorted_data[column].tolist()
     start_time = time.time()
 
-  n = len(values)
-  for i in range (n):
-    for j in range(0, n - i - 1):
-      if values[j] > valurd[j + 1]:
-        values[j], values[j+1] = values[j + 1], values[j]
-  sorted_data[column] = values
-  end_time = time.time()
-  return sorted_data, end_time - start_time
+    n = len(values)
+    for i in range (n):
+      for j in range(0, n - i - 1):
+        if values[j] > valurd[j + 1]:
+          values[j], values[j+1] = values[j + 1], values[j]
+    sorted_data[column] = values
+    end_time = time.time()
+    return sorted_data, end_time - start_time
+
+  def selection_sort(self, column):
+    sorted_data = self.df.copy()
+    values = sorted_data[column].tolist()
+    start_time = time.time()
+
+    n = len(values_
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+          if values[j] < values[min_idx]:
+            min_idx = j 
+        values[i], values[min_idx] = values[min_idx], values[i]
+    sorted_data[column] = values
+    end_time = time.time()
+    return sorted_data, end_time - start_time
+
+  def insertion_sort(self, column):
+    sorted_data = self.df.copy()
+    values = sorted_data[column].tolist()
+    start_time = time.time()
+
+    for i in range(1, len(values)):
+        key = values[i]
+        j = i - 1
+        while j >= 0 and key < values[j]:
+          values[j + 1] = values[j]
+          j -= 1
+        values[j + 1] = key
+    sorted_data[column] = values
+    end_time = time.time()
+    return sorted_data, end_time - start_time
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def main():
