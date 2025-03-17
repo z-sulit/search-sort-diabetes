@@ -25,3 +25,33 @@ At the top of the notebook, click “Run All” or run individual cells with ▶
 
 
 **Sample Output:**
+
+----> run the program via codespaces
+
+Dataset loaded!!
+Available columns:
+['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
+Choose a column to search (Glucose, Age, BMI, etc.): Age
+Enter a value to search for: 30
+
+Choose search method:
+1. Linear Search
+2. Binary Search
+Enter choice: 2
+
+Sorting "Age" column before Binary Search...
+Binary Search: Found at row index 5
+Time taken: 0.000361s
+
+Choose a column to sort (Glucose, Age, BMI, etc.): BMI
+Choose sorting algorithm:
+1. Bubble Sort
+2. Selection Sort
+3. Insertion Sort
+4. Quick Sort
+Enter choice: 4
+
+Sorting by "BMI" using Quick Sort...
+Sorting completed.
+Sorted data saved to "sorted_diabetes.csv".
+Time taken: 0.001561s
