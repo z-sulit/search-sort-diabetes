@@ -16,7 +16,7 @@ class SearchSortBase:
       return None
 
   def save_sorted_data(self, sorted_df, filename="sorted_diabetes.csv"):
-    sorted_df.to_csv(filemame, index=False)
+    sorted_df.to_csv(filename, index=False)
     print(f"Sorted data saved to \"{filename}\".")
       
 
