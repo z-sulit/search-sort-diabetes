@@ -19,7 +19,6 @@ class SearchSortBase:
         sorted_df.to_csv(filename, index=False)
         print(f"Sorted data saved to \"{filename}\".")
 
-#----Bubble, Selection, and Insertion Sort----
 class DiabetesData(SearchSortBase):
     def linear_search(self, column, target):
         for index, value in enumerate(self.df[column]):
@@ -62,49 +61,50 @@ class DiabetesData(SearchSortBase):
             else:
                 high = mid - 1
         return -1
-
-    def bubble_sort(self, column):
-        sorted_data = self.df.copy()
-        values = sorted_data[column].tolist()
+        
+#----Bubble-smallest & swaps, Selection-swaps adjacent, Insertion Sort-inserts in correct pos, and Quick Sort-recursively divides list---- 
+    def bubble_sort(self, column): #like a bubble
+        sorted_data = self.df.copy() #Make a copy of the dataset
+        values = sorted_data[column].tolist() # Convert the column to a list
         start_time = time.time()
 
-        n = len(values)
+        n = len(values) # of elements length of list, outer loop runs n times
         for i in range(n):
-            for j in range(0, n - i - 1):
-                if values[j] > values[j + 1]:
-                    values[j], values[j + 1] = values[j + 1], values[j]
+            for j in range(0, n - i - 1): #largest unsorted number moves to the end & to ensure in-range index
+                if values[j] > values[j + 1]: 
+                    values[j], values[j + 1] = values[j + 1], values[j] #assigns the value of j+1 to values j 
         sorted_data[column] = values
         end_time = time.time()
         return sorted_data, end_time - start_time
 
-    def selection_sort(self, column):
+    def selection_sort(self, column): #choose smallest and swap w/ first element, move 
         sorted_data = self.df.copy()
-        values = sorted_data[column].tolist()
+        values = sorted_data[column].tolist() #extract values from specified column 
         start_time = time.time()
 
-        n = len(values)
+        n = len(values) #tells how many numbers need to be sorted
         for i in range(n):
-            min_idx = i
-            for j in range(i + 1, n):
+            min_idx = i #assumes first element is smallest
+            for j in range(i + 1, n): #index 0 + 1, moved to n (end of list)
                 if values[j] < values[min_idx]:
                     min_idx = j
-            values[i], values[min_idx] = values[min_idx], values[i]
-        sorted_data[column] = values
+            values[i], values[min_idx] = values[min_idx], values[i]     #Swaps the smallest value with the first unsorted element (i).
+        sorted_data[column] = values     #updates the sorted values back into DF
         end_time = time.time()
         return sorted_data, end_time - start_time
 
-    def insertion_sort(self, column):
+    def insertion_sort(self, column):     #1st element-sorted section, pick next element and compare with sorted part, shift to right(largest)
         sorted_data = self.df.copy()
         values = sorted_data[column].tolist()
         start_time = time.time()
 
-        for i in range(1, len(values)):
-            key = values[i]
-            j = i - 1
-            while j >= 0 and key < values[j]:
-                values[j + 1] = values[j]
-                j -= 1
-            values[j + 1] = key
+        for i in range(1, len(values)):  #Starts looping from the second element
+            key = values[i]     #Stores the current value that needs to be inserted in the sorted section
+            j = i - 1         #j is the index of the last sorted element before key.
+            while j >= 0 and key < values[j]:     #Checks if key is smaller than the previous element (values[j])
+                values[j + 1] = values[j]  
+                j -= 1 #Moves to the left, continues checking til key is in position
+            values[j + 1] = key     #places key in its correct position inside the sorted section.
         sorted_data[column] = values
         end_time = time.time()
         return sorted_data, end_time - start_time
@@ -127,6 +127,8 @@ class DiabetesData(SearchSortBase):
         sorted_data[column] = sorted_values
         end_time = time.time()
         return sorted_data, end_time - start_time
+        
+#----Bubble, Selection, Insertion Sort, and Quick Sort---- 
 
 def main():
     diabetes = DiabetesData()
