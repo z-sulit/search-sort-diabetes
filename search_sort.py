@@ -11,11 +11,12 @@ class SearchSortBase:
             df = pd.read_csv(self.file_path)
             print("Dataset loaded!!")
             return df
+
         except FileNotFoundError:
             print("Error: File not found.....")
             return None
 
-    def save_sorted_data(self, sorted_df, filename="sorted_diabetes.csv"):
+    def save_sorted_data(self, sorted_df, filename="test_sorted_diabetes.csv"):
         sorted_df.to_csv(filename, index=False)
         print(f"Sorted data saved to \"{filename}\".")
 
